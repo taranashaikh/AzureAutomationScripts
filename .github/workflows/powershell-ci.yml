@@ -1,0 +1,29 @@
+name: PowerShell CI
+
+# This specifies when the workflow should run. Here, it will run on every push or pull request to the main branch.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-powershell-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    # Step 2: Set up PowerShell
+    - name: Install PowerShell
+      uses: actions/setup-powershell@v1
+
+    # Step 3: Run PowerShell Script
+    - name: Run PowerShell Script
+      run: pwsh ./CreateResourceGroup.ps1
+    - name: Run Another PowerShell Script
+      run: pwsh ./CreateVM.ps1
